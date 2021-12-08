@@ -1,12 +1,22 @@
 /*
-* Prompts the user to enter crew database file, then scan the data inside.
+* Prompts the user to enter crew database file, then scans the data inside.
 */
 
-#include "header.h"
+#include <stdio.h> /* required library for database scanning and displaying informations to user */
+#include <string.h> /* required library to perform string operations */
+#include "schedule.h" /* personal library with crew_t, aircraft_t data type */
+
+/* header.h
+*	Type crew_t has these components:
+*	number, level, cost, tasks_lowcost, total_workhour_lowcost, tasks_fast, total_workhour_fast
+*
+*	Type aircraft_t has these components:
+*	id, level, hours, done
+*/
 
 int scan_crew(crew_t crew[], int *crew_quantity) {
-    FILE *crew_data;
-    char crew_filename[STR_SIZ];
+    FILE *crew_data; /* pointer to crew database file */
+    char crew_filename[STR_SIZ]; /* name of database file */
     
     /* get database filename */
     printf("Enter name of crew database file > ");

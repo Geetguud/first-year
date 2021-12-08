@@ -3,6 +3,7 @@
 		Pembuatan: 4 Desember 2021
 		Modifikasi 1: 6 Desember 2021
 		Modifikasi 2: 7 Desember 2021
+		Modifikasi 3: 8 Desember 2021
 */
 
 /* PROBLEM */
@@ -50,29 +51,31 @@
 	workhour.
 
 	Function find_priority finds a job to be prioritized. This function is only used in the
-	quickest way of scheduling. The rank of priority is: number of hours needed to complete it,
+	quickest way of scheduling. The rank of priority is: highest number of hours needed,
 	then the highest level of maintenance.
 
 	Function scheduling loops through all the maintenance jobs, and puts each of them into the
 	workload of a suitable crew.
 */
 
-#include <stdio.h>
-#include <string.h>
-
-#define STR_SIZ 100
-#define ARR_SIZ 99
+#define STR_SIZ 100 /* maximum length for strings */
+#define ARR_SIZ 99 /* maximum size of arrays */
 
 typedef struct {
-    int number, level;
-    double cost;
-	int tasks_fast, total_workhour_fast; /* workload of the crew in quickest way of scheduling */
-	int tasks_lowcost, total_workhour_lowcost; /* workload of the crew in cheapest way of scheduling */
-} crew_t;
+    int number, level; /* crew number and skill level */
+    double cost; /* crew cost per hour */
+	int tasks_fast, /* number of job assigned (fastest schedule) */
+		total_workhour_fast; /* total hour of work assigned (fastest schedule) */
+	int tasks_lowcost, /* number of job assigned (cheapest schedule) */
+		total_workhour_lowcost; /* total hour of work assigned (cheapest schedule) */
+} crew_t;  /* structure variable for crews */
 
 typedef struct {
-    int id, level, hours, done;
-} aircraft_t;
+    int id, /* aircraft ID */
+		level, /* aircraft level of maintenance */
+		hours, /* number of hours needed for maintenance */
+		done; /* maintenance job state of 'have been scheduled' (used only in fastest schedule) */
+} aircraft_t; /* structure variable for aircraft maintenance jobs */
 
 int scan_crew(crew_t crew[], int *crew_quantity);
 int scan_aircraft(aircraft_t aircraft[], int *aircraft_quantity);
